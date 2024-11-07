@@ -26,3 +26,9 @@ To get started with **DentalIQ**, follow these steps:
 3. **Install required packages**:
    ```bash
     pip install -r requirements.txt
+4. **Install node modules**:
+   ```bash
+   npm install
+5. **Run the server**:
+   ```bash
+   node server.js
