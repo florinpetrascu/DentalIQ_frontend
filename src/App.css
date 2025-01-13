@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  color: #333;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 20px;
+  background-color: #6c63ff;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.language-selector {
+  padding: 5px;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Hero Section */
+.hero-section {
+  /*background: url('/path-to-your-image.jpg') no-repeat center center/cover;
+  */
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
 }
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* Problems Section */
+.problems-section {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #fff;
+}
+.problems-section h2 {
+  margin-bottom: 20px;
+}
+.problems-section ul {
+  list-style: none;
+  padding: 0;
+}
+.problems-section li {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+/* Scan Section */
+.scan-section {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f4f4f8;
+}
+.file-input {
+  margin: 10px;
+  padding: 5px;
+}
+.scan-button, .download-button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.loading-spinner {
+  margin: 20px auto;
+  width: 30px;
+  height: 30px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #6c63ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Footer */
+.footer {
+  background-color: rgb(22, 196, 185);
+  color: black;
+  padding: 20px;
+  text-align: center;
+}
+.footer-links {
+  margin-bottom: 30px;
+}
+.footer-links a {
+  color: black;
+  margin: 0 10px;
+  text-decoration: none;
+}
+/*
+.call-button {
+  background-color: gray;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}*/

@@ -1,0 +1,14 @@
+.hero-section {
+    background-image: url('image2.webp');
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    text-align: center;
+    color: black;
+  }
+  .hero-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    opacity: 0.4;
+  }
+  
