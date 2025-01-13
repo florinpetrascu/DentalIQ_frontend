@@ -1,0 +1,37 @@
+.problems-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  text-align: center;
+}
+ .problems-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+ .problems-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Trei coloane flexibile */
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center; /* Centrare pe orizontală */
+}
+
+
+.problems-list:after {
+  content: ''; /* Pseudo-element pentru a ajusta layout-ul ultimului rând */
+  grid-column: span 3; /* Forțare centrare */
+}
+ .problems-list li {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+}
+ .problems-list li:hover {
+  background: #f0f8ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
