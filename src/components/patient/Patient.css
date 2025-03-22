@@ -1,0 +1,344 @@
+
+.hidden-input {
+    display: none; /* Ascunde input-ul */
+}
+.submit-button.upload{
+    position: relative;
+    left: 10% ;
+    top: 10px;
+    justify-content: center; /* Aliniază pe orizontală */
+    align-items: center;
+}
+.submit-button.send{
+    position: relative;
+    left: 20%;
+    top: 15px
+}
+.text_upload{
+    position: relative;
+    top:7px
+}
+
+.tooth-polygon {
+
+    background-color: rgba(55, 131, 46, 0.45); /* Roșu semi-transparent */
+    border: 5px solid red;
+    display: none; /* Ascuns inițial */
+
+}
+
+.tooth-polygon.visible {
+    display: block;
+}
+
+.
+
+cover-image{
+    background-color: rgba(35, 37, 36, 0.78);
+    width: 1120px;
+    height: 600px;
+    display: none;
+}
+
+.cover-image.visible{
+    display: block;
+}
+.image-preview-wrapper {
+    position: relative;
+    width: 100%; /* Sau dimensiunile exacte ale imaginii */
+    height: auto;
+
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #4caf50; /* Culoarea principală a spinner-ului */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundal semitransparent */
+    z-index: 1000; /* Deasupra tuturor */
+}
+.chart_img {
+    background-image: url('../../icons/teeth_chart1.png');
+    background-size: contain; /* Asigură-te că imaginea este complet vizibilă */
+    background-repeat: no-repeat; /* Previne repetarea imaginii dacă este mai mică decât div-ul */
+    background-position: center;
+    width: 1120px;
+    height: 550px;
+    padding: 40px 20px;
+    border-radius: 15px;
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-preview {
+    background-size: contain; /* Asigură-te că imaginea este complet vizibilă */
+    background-repeat: no-repeat; /* Previne repetarea imaginii dacă este mai mică decât div-ul */
+    background-position: center;
+    width: 1120px;
+    height: 600px;
+    padding: 40px 20px;
+    border-radius: 15px;
+    border: 2px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.teeth_buton {
+    position:absolute;
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+/* Bordura butonului la hover */
+.teeth_buton:hover {
+    border-color: #0bb4c4; /* Culoare bordură la hover */
+    color: #0bb4c4;
+}
+.teeth_buton:not(:hover) {
+    color: transparent; /* Roșu transparent */
+}
+
+.teeth_buton.isMissing{
+    background-color: rgba(253, 5, 95, 0.3); /* Roșu transparent */
+}
+
+.teeth_buton.isExisting :not(:hover) {
+    color: transparent; /* Text invizibil */
+}
+/*.teeth_buton.isExisting.text {*/
+/*    font-size: 14px;*/
+/*    font-weight: bold;*/
+/*    margin-top: auto; !* Textul rămâne la bază *!*/
+/*}*/
+
+
+
+/* Stiluri pentru butoane */
+.teeth_buton1 {
+
+    top: 14%;
+    left: 2px;
+    height: 160px;
+    width: 65px;
+}
+.teeth_buton2 {
+    top: 14%;
+    left: 80px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton3 {
+    top: 14%;
+    left: 170px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton4 {
+    top: 14%;
+    left: 245px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton5 {
+    top: 14%;
+    left: 305px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton6 {
+    top: 14%;
+    left: 365px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton7 {
+    top: 14%;
+    left: 423px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton8 {
+    top: 14%;
+    left: 483px;
+    height: 160px;
+    width: 70px;
+}
+
+.teeth_buton9 {
+    top: 14%;
+    left: 570px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton10 {
+    top: 14%;
+    left: 625px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton11 {
+    top: 14%;
+    left: 675px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton12 {
+    top: 14%;
+    left: 737px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton13 {
+    top: 14%;
+    left: 800px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton14 {
+    top: 14%;
+    left: 882px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton15 {
+    top: 14%;
+    left: 957px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton16 {
+    top: 14%;
+    left: 1038px;
+    height: 160px;
+    width: 70px;
+}
+
+.teeth_buton32 {
+    top: 54%;
+    left: 2px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton31 {
+    top: 54%;
+    left: 80px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton30 {
+    top: 54%;
+    left: 170px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton29 {
+    top: 54%;
+    left: 245px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton28 {
+    top: 54%;
+    left: 305px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton27 {
+    top: 54%;
+    left: 365px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton26 {
+    top: 54%;
+    left: 423px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton25 {
+    top: 54%;
+    left: 483px;
+    height: 160px;
+    width: 70px;
+}
+
+.teeth_buton24 {
+    top: 54%;
+    left: 570px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton23 {
+    top: 54%;
+    left: 625px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton22 {
+    top: 54%;
+    left: 675px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton21 {
+    top: 54%;
+    left: 737px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton20 {
+    top: 54%;
+    left: 800px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton19 {
+    top: 54%;
+    left: 882px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton18 {
+    top: 54%;
+    left: 957px;
+    height: 160px;
+    width: 70px;
+}
+.teeth_buton17 {
+    top: 54%;
+    left: 1038px;
+    height: 160px;
+    width: 70px;
+}
+
+
+/* Adaugă cât mai multe butoane pentru fiecare dinte */
