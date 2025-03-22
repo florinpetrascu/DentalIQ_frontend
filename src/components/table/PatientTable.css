@@ -1,0 +1,30 @@
+.patient-table {
+    border-collapse: collapse;
+    width: 100%;
+    color: var(--text-color);
+}
+
+.patient-table th,
+.patient-table td {
+    border: none;
+    padding: 8px;
+    text-align: left;
+}
+
+.patient-table th {
+    background-color: var(--border-color);
+    /* Header background color */
+    border-top: 2px solid var(--border-color);
+    /* Top border for header */
+}
+
+.patient-table tbody tr {
+    border-top: 2px solid var(--border-color);
+    /* Top border for each row */
+    background-color: var(--background-color);
+}
+
+.patient-table tbody tr:hover {
+    background-color: var(--border-color);
+    /* Background color on hover */
+}

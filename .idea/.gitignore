@@ -6,3 +6,6 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+#npm debug log
+/node-js-debug/
+/node_modules/
