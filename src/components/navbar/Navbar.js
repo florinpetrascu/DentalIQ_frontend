@@ -24,4 +24,5 @@ const Navbar = () => {
   );
 }
 
+// mere treaba
 export default Navbar;
