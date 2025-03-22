@@ -23,7 +23,7 @@ const Patients = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('/api/patients');
+      const response = await axios.get('http://100.97.33.33:3000/api/patients');
       console.log("API Response:", response.data); // Debugging
 
       if (Array.isArray(response.data)) {
