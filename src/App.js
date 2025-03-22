@@ -38,4 +38,5 @@ const App = () => {
   );
 }
 
+// "start": "react-scripts start",
 export default App;
