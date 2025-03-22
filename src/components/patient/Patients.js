@@ -3,9 +3,7 @@ import axios from 'axios';
 import PatientTable from '../table/PatientTable.js';
 import "./Patients.css";
 import AddPatientForm from './AddPatientForm.js';
-import {Link, Route, Routes} from "react-router-dom";
-import Appointments from "../Appointments";
-import Patient from "./Patient";
+
 
 const Patients = () => {
   const [patients, setPatients] = useState([]);

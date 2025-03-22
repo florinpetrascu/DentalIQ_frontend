@@ -20,7 +20,7 @@ const Tooth = ({ tooth }) => {
     const [toothName, setName] = useState("");
     const [diseases, setDiseases] = useState([]);
     const [toothTreatments, setTreatments] = useState([]);
-    const [notes, setNotes] = useState("");
+   // const [notes, setNotes] = useState("");
 
     useEffect(() => {
         if (tooth) {
@@ -34,7 +34,7 @@ const Tooth = ({ tooth }) => {
             );
             setDiseases(foundDiseases);
             setTreatments(foundTreatments);
-            setNotes(tooth.notes || "Nicio notă suplimentară");
+            //setNotes(tooth.notes || "Nicio notă suplimentară");
         }
     }, [tooth]);
 

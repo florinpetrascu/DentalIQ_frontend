@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line
 import { Link, useNavigate } from 'react-router-dom';
 import './PatientTable.css';
 

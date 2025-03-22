@@ -6,8 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navbar from './components/navbar/Navbar.js';
 import Sidebar from './components/sidebar/Sidebar.js';
-import MainContent from './components/content/MainContent.js';
-import PatientTable from './components/table/PatientTable.js'
 import '../src/theme/Themes.css';
 import Patient from "./components/patient/Patient";
 

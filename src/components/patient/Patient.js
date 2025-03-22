@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {useParams, useLocation, Route, Routes, useNavigate} from 'react-router-dom';
+import {useParams, useLocation} from 'react-router-dom';
 import "./Patients.css";
 import Tooth from "./Tooth";
 import "./Patient.css" ;
-import teethChart from '../../icons/teeth_chart.png'
+
 
 const Patient = () => {
-    const navigate = useNavigate();
+
     const { id } = useParams();
     const location = useLocation();
     let patient = location.state?.patient;
@@ -22,6 +22,7 @@ const Patient = () => {
     const [hoveredTooth, setHoveredTooth] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    // eslint-disable-next-line
     useEffect(() => {
         console.log("useEffect");
         if (patientHere) {
@@ -44,7 +45,7 @@ const Patient = () => {
                 })
                 .catch(error => console.error("Error fetching patient:", error));
         }
-    }, [patientHere]);
+    }, [patientHere, id]);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
