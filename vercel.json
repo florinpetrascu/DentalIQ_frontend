@@ -1,9 +1,14 @@
-
 {
   "rewrites": [
+    { "source": "/api/(.*)", "destination": "http://100.97.33.33:3000/api/$1" }
+  ],
+  "headers": [
     {
       "source": "/api/(.*)",
-      "destination": "http://100.97.33.33:3000/api/$1"
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" }
+      ]
     }
   ]
 }

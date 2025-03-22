@@ -38,4 +38,15 @@ const App = () => {
 
 // "start": "react-scripts start",
 //"proxy": "http://100.97.33.33:3000",
+
+
+// {
+//   "rewrites": [
+//   {
+//     "source": "/api/(.*)",
+//     "destination": "http://100.97.33.33:3000/api/$1"
+//   }
+// ]
+// }
+
 export default App;
