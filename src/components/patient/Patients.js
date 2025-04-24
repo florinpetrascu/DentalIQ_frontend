@@ -15,7 +15,7 @@ const Patients = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('/api/patients');
+      const response = await axios.get('https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/patients');
       console.log("API Response:", response.data); // Debugging
 
       if (Array.isArray(response.data)) {
