@@ -31,7 +31,7 @@ const Patient = () => {
             setPhoneNumber(patientHere.phoneNumber);
             setTeeth(patientHere.teeths);
             if (patientHere.image) {
-                setPreviewImage(`data:image/jpeg;base64,${patientHere.image}`);
+                setPreviewImage(patientHere.image);
             }
 
         } else {
@@ -108,13 +108,13 @@ const Patient = () => {
 
     const handleToothHover = (toothName) => {
         console.log(`Teeth hover start`);
-        console.log(toothName);
+        //console.log(toothName);
         setHoveredTooth(toothName); // Setează dintele curent
     };
 
     const handleToothHoverEnd = () => {
         console.log(`Teeth hover end`);
-        console.log(hoveredTooth);
+        //console.log(hoveredTooth);
         setHoveredTooth(null); // Resetează dintele curent
     };
 
@@ -134,8 +134,8 @@ const Patient = () => {
                         {/* Crearea butoanelor din 1 până la 32 */}
                         {Array.from({ length: 32 }, (_, index) => {
                             const toothNumber = index + 1;
-                            const tooth = teeth.find((t) => t.name === toothNumber.toString());
-                            const isExisting = teeth.some((tooth) => tooth.name === toothNumber.toString()); // Verifică dacă toothNumber este egal cu tooth.name
+                            const tooth = teeth.find((t) => t.name === toothNumber);
+                            const isExisting = teeth.some((tooth) => tooth.name === toothNumber); // Verifică dacă toothNumber este egal cu tooth.name
 
                             return (
                                 <button
@@ -167,12 +167,13 @@ const Patient = () => {
                                     .join(", ");
                                // const points = "0% 0%, 100% 0%, 50% 100% ,30% 70% ,50% 20%";
                                 console.log("points")
-                                console.log(points)
+                                //console.log(points)
                                 return (
                                     <div
                                         key={index}
                                         //className={"tooth-polygon"}
-                                        className={`tooth-polygon ${hoveredTooth === tooth.name ? "visible" : ""}`}
+                                        //className = {"tooth-polygon visible"}
+                                        className={`tooth-polygon ${hoveredTooth == tooth.name ? "visible" : ""}`}
                                         style={{
                                             position: "absolute",  // Permite poziționarea relativă față de imagine
                                             top: "60px",  // Ajustează poziția în funcție de imaginea ta

@@ -39,7 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://100.97.33.33:3000",
+  "proxy": "https://dentaliq-backend-3979cd27bc0b.herokuapp.com",
 
   "engines": {
     "node": "20"

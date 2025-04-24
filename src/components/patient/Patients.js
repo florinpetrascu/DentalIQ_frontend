@@ -12,22 +12,16 @@ const Patients = () => {
     fetchPatients();
   }, []);
 
-  // const fetchPatients = async () => {
-  //   try {
-  //     const response = await axios.get('/api/patients');
-  //     setPatients(response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching patients:', error);
-  //   }
-  // };
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('http://100.97.33.33:3000/api/patients');
+      const response = await axios.get('/api/patients');
       console.log("API Response:", response.data); // Debugging
 
       if (Array.isArray(response.data)) {
         setPatients(response.data);
+        console.log("Patients aici");
+        console.log(patients);
       } else {
         console.error("Unexpected API response:", response.data);
         setPatients([]); // Evită erorile
@@ -48,16 +42,12 @@ const Patients = () => {
     setSearchTerm(event.target.value);
   };
 
-  // const filteredPatients = patients.filter(patient =>
-  //   patient.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   patient.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   patient.phoneNumber.includes(searchTerm)
-  // );
+
 
   const filteredPatients = Array.isArray(patients) ? patients.filter(patient =>
-      patient.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      patient.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      patient.phoneNumber?.includes(searchTerm)
+      patient.first_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      patient.last_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      patient.phone_number?.includes(searchTerm)
   ) : [];
 
   return (
