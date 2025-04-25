@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {useParams, useLocation} from 'react-router-dom';
 import "./Patients.css";
 import Tooth from "./Tooth";
@@ -33,18 +34,37 @@ const Patient = () => {
             // if (patientHere.image) {
             //     setPreviewImage(patientHere.image);
             // }
+            // Adăugăm codul pentru a obține radiografia
+            const fetchRadiography = async () => {
+                try {
+                    // Trimite requestul către API-ul de radiografii
+                    const response = await axios.get(`https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/radiographies/${id}`);
 
-        } else {
-            // Fetch patient data from API if not passed through state
-            fetch(`/api/patients/${id}`)
-                .then(res => res.json())
-                .then(data => {
-                    setFirstName(data.firstName);
-                    setLastName(data.lastName);
-                    setPhoneNumber(data.phoneNumber);
-                })
-                .catch(error => console.error("Error fetching patient:", error));
+                    if (response.data && response.data.url) {
+                        setPreviewImage(response.data.url); // Setează URL-ul radiografiei pentru previzualizare
+                    } else {
+                        console.error("Radiografia nu a fost găsită pentru acest pacient.");
+                    }
+                } catch (error) {
+                    console.error("Eroare la aducerea radiografiei:", error);
+                }
+            };
+
+            fetchRadiography();
+
         }
+        // else {
+        //
+        //     // Fetch patient data from API if not passed through state
+        //     fetch(`/api/patients/${id}`)
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             setFirstName(data.firstName);
+        //             setLastName(data.lastName);
+        //             setPhoneNumber(data.phoneNumber);
+        //         })
+        //         .catch(error => console.error("Error fetching patient:", error));
+        // }
     }, [patientHere, id]);
 
     const handleImageUpload = (event) => {
