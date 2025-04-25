@@ -26,13 +26,13 @@ const Patient = () => {
     useEffect(() => {
         console.log("useEffect");
         if (patientHere) {
-            setFirstName(patientHere.firstName);
-            setLastName(patientHere.lastName);
-            setPhoneNumber(patientHere.phoneNumber);
-            setTeeth(patientHere.teeths);
-            if (patientHere.image) {
-                setPreviewImage(patientHere.image);
-            }
+            setFirstName(patientHere.first_name);
+            setLastName(patientHere.last_name);
+            setPhoneNumber(patientHere.phone_number);
+            setTeeth([]);
+            // if (patientHere.image) {
+            //     setPreviewImage(patientHere.image);
+            // }
 
         } else {
             // Fetch patient data from API if not passed through state

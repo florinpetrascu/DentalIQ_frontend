@@ -13,12 +13,12 @@ const AddPatientForm = ({ onAddPatient }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/patients', {
+      const response = await axios.post('https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/patients', {
         firstName,
         lastName,
         phoneNumber,
       });
-
+      console.log("response from add ",response.data);
       onAddPatient(response.data); // Update state with the newly added patient
       setNotification('Patient added successfully!');
       setNotificationType('success');

@@ -33,7 +33,10 @@ const Patients = () => {
   };
 
   const handleAddPatient = (newPatient) => {
+    console.log("from add patient1",newPatient);
+    console.log("from add patient2",patients);
     setPatients([...patients, newPatient]);
+
   };
 
   const [searchTerm, setSearchTerm] = useState('');
