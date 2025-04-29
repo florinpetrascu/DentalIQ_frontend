@@ -26,19 +26,44 @@ const Patient = () => {
     // eslint-disable-next-line
     useEffect(() => {
         console.log("useEffect");
+
+        const fetchPatient = async () => {
+            try {
+                // Trimite requestul către API-ul de radiografii
+                const response = await axios.get(`/api/patients/${id}`);
+
+                if (response.data) {
+                    //setPatientHere(response.data); // Setează URL-ul radiografiei pentru previzualizare
+                    setFirstName(response.data.first_name);
+                    setLastName(response.data.last_name);
+                    setPhoneNumber(response.data.phone_number);
+                    setTeeth(response.data.teeths)
+                } else {
+                    console.error("Nu a fost găsit acest pacient.");
+                }
+            } catch (error) {
+                console.error("Eroare la aducerea pacientului:", error);
+            }
+        };
+
+        fetchPatient();
+
         if (patientHere) {
             setFirstName(patientHere.first_name);
             setLastName(patientHere.last_name);
             setPhoneNumber(patientHere.phone_number);
-            setTeeth([]);
-            // if (patientHere.image) {
-            //     setPreviewImage(patientHere.image);
-            // }
+
+            if (patientHere.teeths) {
+                setTeeth(patientHere.teeths);
+            }
+            else{
+
+            }
             // Adăugăm codul pentru a obține radiografia
             const fetchRadiography = async () => {
                 try {
                     // Trimite requestul către API-ul de radiografii
-                    const response = await axios.get(`https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/radiographies/${id}`);
+                    const response = await axios.get(`/api/radiographies/${id}`);
 
                     if (response.data && response.data.url) {
                         setPreviewImage(response.data.url); // Setează URL-ul radiografiei pentru previzualizare
@@ -59,9 +84,11 @@ const Patient = () => {
         //     fetch(`/api/patients/${id}`)
         //         .then(res => res.json())
         //         .then(data => {
-        //             setFirstName(data.firstName);
-        //             setLastName(data.lastName);
-        //             setPhoneNumber(data.phoneNumber);
+        //             console.log("Raspuns primit ",data)
+        //             setFirstName(data.first_name);
+        //             setLastName(data.last_name);
+        //             setPhoneNumber(data.phone_number);
+        //             setTeeth(data.teeths)
         //         })
         //         .catch(error => console.error("Error fetching patient:", error));
         // }
@@ -96,7 +123,7 @@ const Patient = () => {
             };
 
             try {
-                const response = await fetch("/api/upload", {
+                const response = await fetch("/api/ai/analyse", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -154,8 +181,8 @@ const Patient = () => {
                         {/* Crearea butoanelor din 1 până la 32 */}
                         {Array.from({ length: 32 }, (_, index) => {
                             const toothNumber = index + 1;
-                            const tooth = teeth.find((t) => t.name === toothNumber);
-                            const isExisting = teeth.some((tooth) => tooth.name === toothNumber); // Verifică dacă toothNumber este egal cu tooth.name
+                            const tooth = teeth.find((t) => t.name == toothNumber);
+                            const isExisting = teeth.some((tooth) => tooth.name == toothNumber); // Verifică dacă toothNumber este egal cu tooth.name
 
                             return (
                                 <button
