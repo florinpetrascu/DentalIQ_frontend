@@ -30,7 +30,7 @@ const Patient = () => {
         const fetchPatient = async () => {
             try {
                 // Trimite requestul către API-ul de radiografii
-                const response = await axios.get(`/api/patients/${id}`);
+                const response = await axios.get(`https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/patients/${id}`);
 
                 if (response.data) {
                     //setPatientHere(response.data); // Setează URL-ul radiografiei pentru previzualizare
@@ -63,7 +63,7 @@ const Patient = () => {
             const fetchRadiography = async () => {
                 try {
                     // Trimite requestul către API-ul de radiografii
-                    const response = await axios.get(`/api/radiographies/${id}`);
+                    const response = await axios.get(`https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/radiographies/${id}`);
 
                     if (response.data && response.data.url) {
                         setPreviewImage(response.data.url); // Setează URL-ul radiografiei pentru previzualizare
@@ -123,7 +123,7 @@ const Patient = () => {
             };
 
             try {
-                const response = await fetch("/api/ai/analyse", {
+                const response = await fetch("https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/ai/analyse", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
