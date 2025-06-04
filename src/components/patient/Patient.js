@@ -4,7 +4,7 @@ import {useParams, useLocation} from 'react-router-dom';
 import "./Patients.css";
 import Tooth from "./Tooth";
 import "./Patient.css" ;
-
+import {exportRadiographWithBoxes, generatePdf} from "./pdf_utils";
 
 const Patient = () => {
 
@@ -30,7 +30,7 @@ const Patient = () => {
         const fetchPatient = async () => {
             try {
                 // Trimite requestul către API-ul de radiografii
-                const response = await axios.get(`https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/patients/${id}`);
+                const response = await axios.get(`/api/patients/${id}`);
 
                 if (response.data) {
                     //setPatientHere(response.data); // Setează URL-ul radiografiei pentru previzualizare
@@ -59,39 +59,48 @@ const Patient = () => {
             else{
 
             }
-            // Adăugăm codul pentru a obține radiografia
             const fetchRadiography = async () => {
                 try {
-                    // Trimite requestul către API-ul de radiografii
-                    const response = await axios.get(`https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/radiographies/${id}`);
+                    // 1. Obține URL-ul imaginii
+                    const response = await axios.get(`/api/radiographies/${id}`);
+                    const url = response.data?.url;
 
-                    if (response.data && response.data.url) {
-                        setPreviewImage(response.data.url); // Setează URL-ul radiografiei pentru previzualizare
-                    } else {
+                    if (!url) {
                         console.error("Radiografia nu a fost găsită pentru acest pacient.");
+                        return;
                     }
+
+                    // 2. Folosește proxy POST pentru a obține imaginea ca blob
+                    const proxyResponse = await fetch("/api/radiographies/proxy-image", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ url }),  // URL simplu, neencodat
+                    });
+
+                    if (!proxyResponse.ok) {
+                        throw new Error("Failed to fetch image through proxy.");
+                    }
+
+                    const blob = await proxyResponse.blob();
+
+                    // 3. Transformă blob în base64 pentru previzualizare
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const base64data = reader.result;
+                        setPreviewImage(base64data); // ex: data:image/png;base64,...
+                    };
+                    reader.readAsDataURL(blob);
+
                 } catch (error) {
                     console.error("Eroare la aducerea radiografiei:", error);
                 }
             };
-
             fetchRadiography();
 
         }
-        // else {
-        //
-        //     // Fetch patient data from API if not passed through state
-        //     fetch(`/api/patients/${id}`)
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             console.log("Raspuns primit ",data)
-        //             setFirstName(data.first_name);
-        //             setLastName(data.last_name);
-        //             setPhoneNumber(data.phone_number);
-        //             setTeeth(data.teeths)
-        //         })
-        //         .catch(error => console.error("Error fetching patient:", error));
-        // }
+
     }, [patientHere, id]);
 
     const handleImageUpload = (event) => {
@@ -123,7 +132,7 @@ const Patient = () => {
             };
 
             try {
-                const response = await fetch("https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/ai/analyse", {
+                const response = await fetch("/api/ai/analyse", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
@@ -165,6 +174,12 @@ const Patient = () => {
         setHoveredTooth(null); // Resetează dintele curent
     };
 
+    const handleGeneratePdf = async () => {
+        const imageElement = document.getElementById("panorama");
+        await generatePdf( imageElement, teeth, firstName, lastName);
+        //await exportRadiographWithBoxes( imageElement, teeth);
+    };
+
     return (
         <div className={`main-content ${isSubmitting ? "disabled" : ""}`}>
             {isSubmitting && (
@@ -174,43 +189,19 @@ const Patient = () => {
             )}
             <div className='left-content'>
 
-                    <div className="chart_img">
 
-
-
-                        {/* Crearea butoanelor din 1 până la 32 */}
-                        {Array.from({ length: 32 }, (_, index) => {
-                            const toothNumber = index + 1;
-                            const tooth = teeth.find((t) => t.name == toothNumber);
-                            const isExisting = teeth.some((tooth) => tooth.name == toothNumber); // Verifică dacă toothNumber este egal cu tooth.name
-
-                            return (
-                                <button
-                                    key={index}
-                                    className={`teeth_buton  ${isExisting ? "isExisting" : "isMissing"} teeth_buton${toothNumber}`}
-                                    onClick={() => handleToothClick(tooth)}
-                                    onMouseEnter={() => handleToothHover(toothNumber.toString())}
-                                    onMouseLeave={handleToothHoverEnd}
-                                    disabled={isSubmitting}
-                                >
-                                 {`${toothNumber}`}
-                                </button>
-                            );
-                        })}
-
-                    </div>
 
                 {/* Imaginea panoramică */}
                 <div >
                     {previewImage && (
                         <div  className="image-preview-wrapper">
-                            <img src={previewImage} alt="Preview" className="image-preview" />
+                            <img id="panorama" src={previewImage} alt="Preview" className="image-preview" />
 
                             {/* Poligoane pentru fiecare dinte */}
                             {teeth.map((tooth, index) => {
 
                                 const points = JSON.parse(tooth.polygon)
-                                    .map(([x, y]) => `${x / 10}% ${y / 10}%`) // Normalizează punctele pentru proporții relative
+                                    .map(([x, y]) => `${x / 11.1}% ${y / 11.3}%`) // Normalizează punctele pentru proporții relative
                                     .join(", ");
                                // const points = "0% 0%, 100% 0%, 50% 100% ,30% 70% ,50% 20%";
                                 console.log("points")
@@ -235,25 +226,43 @@ const Patient = () => {
                                 );
                             })}
 
-                                   {/*<div*/}
-
-                                   {/*     className={`cover-image ${hoveredTooth != null ? "visible" : ""}` }*/}
-                                   {/*      style={{*/}
-                                   {/*         position: "absolute",*/}
-                                   {/*         zIndex: 10*/}
-                                   {/*     }}*/}
-                                   {/*></div>*/}
                         </div>
                     )}
                 </div>
 
-                {/*<div>*/}
-                {/*    {previewImage && <img src={previewImage} alt="Preview" className="image-preview" />}*/}
-                {/*</div>*/}
 
 
+                <div className="teeth_chart">
+
+
+
+                    {/* Crearea butoanelor din 1 până la 32 */}
+                    {Array.from({ length: 32 }, (_, index) => {
+                        const toothNumber = index + 1;
+                        const tooth = teeth.find((t) => t.name == toothNumber);
+                        const isExisting = teeth.some((tooth) => tooth.name == toothNumber); // Verifică dacă toothNumber este egal cu tooth.name
+
+                        return (
+                            <button
+                                key={index}
+                                className={`teeth_buton  ${isExisting ? "isExisting" : "isMissing"} teeth_buton${toothNumber}`}
+
+                                onClick={() => handleToothClick(tooth)}
+                                onMouseEnter={() => handleToothHover(toothNumber.toString())}
+                                onMouseLeave={handleToothHoverEnd}
+                                disabled={isSubmitting}
+                            >
+                                {`${toothNumber}`}
+                            </button>
+                        );
+                    })}
 
                 </div>
+
+
+
+
+            </div>
 
 
 
@@ -298,9 +307,18 @@ const Patient = () => {
                         <p className="text_upload">X-ray Upload </p>
                     </label>
 
+
+
+
                     <button type="submit" className="submit-button send" onClick={handleSubmit} disabled={isSubmitting}>
                         {isSubmitting ? "Loading..." : "AI Scan"}
                     </button>
+
+
+                    <button type="button" className="submit-button pdf" onClick={() => handleGeneratePdf()}>
+                        Pdf Report
+                    </button>
+
 
                 </form>
 

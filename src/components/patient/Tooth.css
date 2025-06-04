@@ -52,3 +52,15 @@
 .tooth-info strong {
     color: #333;
 }
+.custom-button {
+    width: 100px;
+    height: 100px;
+    background-image: url('../../icons/dinte.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-color: black;
+}

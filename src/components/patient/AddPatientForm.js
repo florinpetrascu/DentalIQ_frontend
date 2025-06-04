@@ -13,7 +13,7 @@ const AddPatientForm = ({ onAddPatient }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/patients', {
+      const response = await axios.post('/api/patients', {
         firstName,
         lastName,
         phoneNumber,

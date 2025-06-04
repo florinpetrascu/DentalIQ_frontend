@@ -8,45 +8,35 @@ import Navbar from './components/navbar/Navbar.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import '../src/theme/Themes.css';
 import Patient from "./components/patient/Patient";
-
+import ProtectedRoute from "./components/login/ProtectedRoute";
+import Login from "./components/login/Login";
+import ProtectedLayout from "./components/login/ProtectedLayout";
 
 const App = () => {
-
-
   return (
+      <Router>
+        <div>
+          <Navbar />
 
-    <Router>
-      <div>
-        <Navbar />
-
-        <div className="sidebar-and-content">
-          <Sidebar />
           <Routes>
-            <Route path="/patient/:id" element={<Patient />} />
-            <Route path="/patients" element={<Patients />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/calendar" element={<Patients />} />
-            <Route path="/mesaje" element={<Patients />} />
-            <Route path="/formular" element={<Patients />} />
+            <Route path="/login" element={<Login />} />
+
+            {/* Grup de rute protejate cu layout care include sidebar */}
+            <Route
+                element={
+                  <ProtectedRoute>
+                    <ProtectedLayout />
+                  </ProtectedRoute>
+                }
+            >
+              <Route path="/" element={<Patients />} />
+              <Route path="/patients" element={<Patients />} />
+              <Route path="/patient/:id" element={<Patient />} />
+              {/* Adaugă și alte rute aici */}
+            </Route>
           </Routes>
         </div>
-
-      </div>
-    </Router>
+      </Router>
   );
-}
-
-// "start": "react-scripts start",
-//"proxy": "http://100.97.33.33:3000",
-
-
-// {
-//   "rewrites": [
-//   {
-//     "source": "/api/(.*)",
-//     "destination": "http://100.97.33.33:3000/api/$1"
-//   }
-// ]
-// }
-//aici
+};
 export default App;

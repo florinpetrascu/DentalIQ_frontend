@@ -15,7 +15,18 @@ const Patients = () => {
 
   const fetchPatients = async () => {
     try {
-      const response = await axios.get('https://dentaliq-backend-3979cd27bc0b.herokuapp.com/api/patients');
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error("Token missing");
+        return;
+      }
+
+      const response = await axios.get('http://localhost:8000/api/patients', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log("API Response:", response.data); // Debugging
 
       if (Array.isArray(response.data)) {

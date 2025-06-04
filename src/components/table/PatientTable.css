@@ -28,3 +28,24 @@
     background-color: var(--border-color);
     /* Background color on hover */
 }
+
+.context-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 16px;
+    z-index: 1000;
+    height: 140px;
+}
+.context-menu button{
+    background-color: var(--danger-color);
+    border-radius: 6px;
+    border-color: var(--danger-color);
+    position: relative;
+    left: 340px;
+    top: 30px;
+}
+.context-menu h3{
+    color:var(--text-color) ;
+}

@@ -69,6 +69,7 @@ const Tooth = ({ tooth }) => {
                 <p>
                     <strong>Treatments:</strong>
                 </p>
+
                 {toothTreatments.length > 0 ? (
                     <ul className="issues-list">
                         {toothTreatments.map((treatment, index) => (
